@@ -1,7 +1,10 @@
-const CACHE = "morninglift-v1";
+const CACHE = "morninglift-v2";
 const SHELL = [
   "./",
   "./index.html",
+  "./style.css",
+  "./plan.js",
+  "./app.js",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",

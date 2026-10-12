@@ -1,0 +1,682 @@
+/* =========================================================
+   Theme
+   ========================================================= */
+:root {
+  --night: #10131F;
+  --surface: #181D2E;
+  --surface2: #212840;
+  --line: #2E3550;
+  --text: #ECEDF5;
+  --muted: #8C94B2;
+  --accent: #F2A14B;      /* swapped per profile in app.js */
+  --accent-dim: #F2A14B33;
+  --ok: #5FD4A0;
+  --display: "Avenir Next", "Avenir", "Futura", "Trebuchet MS", system-ui, sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --pad: 18px;
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--night);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input {
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 10px;
+  color: var(--text);
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================
+   Header: profile switch + settings gear
+   ========================================================= */
+header {
+  padding: calc(14px + env(safe-area-inset-top)) var(--pad) 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.switch {
+  display: flex;
+  gap: 6px;
+  background: var(--surface);
+  padding: 4px;
+  border-radius: 999px;
+  flex: 1;
+}
+
+.switch button {
+  flex: 1;
+  padding: 8px 6px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  transition: background .18s, color .18s;
+}
+
+.switch button[aria-pressed="true"] {
+  background: var(--accent);
+  color: #14121A;
+}
+
+.gear {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  font-size: 18px;
+}
+
+/* =========================================================
+   Hero card (top of each tab)
+   ========================================================= */
+.hero {
+  margin: 6px var(--pad) 0;
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid var(--line);
+}
+
+.datum {
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: .02em;
+}
+
+.session {
+  font-family: var(--display);
+  font-size: 30px;
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  margin: 6px 0 2px;
+}
+
+.session .accent {
+  color: var(--accent);
+}
+
+.subnote {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Protein / calorie bars */
+.meters {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.meter-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.meter-top b {
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.meter-top span {
+  color: var(--muted);
+}
+
+.track {
+  height: 9px;
+  background: var(--surface2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  width: 0;
+  transition: width .35s ease;
+}
+
+.fill.cal {
+  background: linear-gradient(90deg, var(--accent), #E86A6A);
+}
+
+/* =========================================================
+   Sections and headings
+   ========================================================= */
+section {
+  padding: 0 var(--pad);
+}
+
+h2 {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  margin: 26px 0 10px;
+  color: var(--text);
+}
+
+h2 small {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 13px;
+  margin-left: 8px;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 13px;
+  margin: -4px 0 12px;
+}
+
+/* =========================================================
+   Today tab: exercises and sets
+   ========================================================= */
+.ex {
+  border-top: 1px solid var(--line);
+  padding: 14px 0;
+}
+
+.ex:last-of-type {
+  border-bottom: 1px solid var(--line);
+}
+
+.ex-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ex-name {
+  font-weight: 600;
+  font-size: 15.5px;
+}
+
+.ex-rx {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.ex-cue {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.sets {
+  display: flex;
+  gap: 8px;
+  margin-top: 11px;
+}
+
+.set {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.set.done {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.set label {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
+.set input {
+  padding: 6px 4px;
+  text-align: center;
+  font-size: 15px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.set .row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.tick {
+  width: 100%;
+  margin-top: 7px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--surface2);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.set.done .tick {
+  background: var(--accent);
+  color: #14121A;
+}
+
+/* Big full-width buttons */
+.big {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #14121A;
+  font-weight: 700;
+  font-size: 16px;
+  margin: 22px 0 4px;
+  font-family: var(--display);
+}
+
+.big.ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+.big[disabled] {
+  opacity: .45;
+}
+
+/* =========================================================
+   Food tab
+   ========================================================= */
+.food-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.food-row .nm {
+  flex: 1;
+  font-size: 15px;
+}
+
+.food-row .mac {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.food-row .del {
+  color: var(--muted);
+  font-size: 20px;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.chip {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 13px;
+  font-size: 13.5px;
+}
+
+.chip b {
+  font-weight: 600;
+}
+
+.chip .p {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.bowl {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 14px;
+  padding: 15px;
+}
+
+.bowl .t {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.bowl .d {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin-top: 4px;
+}
+
+.custom {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.custom input:nth-child(1) {
+  flex: 3;
+}
+
+.custom input:nth-child(2),
+.custom input:nth-child(3) {
+  flex: 1;
+  min-width: 0;
+}
+
+.custom button {
+  flex: 0 0 46px;
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 22px;
+}
+
+/* =========================================================
+   Progress tab
+   ========================================================= */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.field label {
+  display: block;
+  color: var(--muted);
+  font-size: 12.5px;
+  margin-bottom: 4px;
+}
+
+.chart {
+  width: 100%;
+  height: 170px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  margin-top: 4px;
+}
+
+.stat-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.stat {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.stat .v {
+  font-family: var(--display);
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.stat .k {
+  color: var(--muted);
+  font-size: 12.5px;
+  margin-top: 5px;
+}
+
+.log-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.log-row span {
+  color: var(--muted);
+}
+
+/* Week strip: one box per day */
+.week {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.week div {
+  flex: 1;
+  text-align: center;
+}
+
+.week .d {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+
+.week .b {
+  height: 30px;
+  border-radius: 7px;
+  background: var(--surface2);
+}
+
+.week .b.on {
+  background: var(--accent);
+}
+
+.week .b.rest {
+  background: transparent;
+  border: 1px dashed var(--line);
+}
+
+.week .b.today {
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* =========================================================
+   Bottom nav
+   ========================================================= */
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background: rgba(16, 19, 31, .93);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 20;
+}
+
+nav button {
+  flex: 1;
+  padding: 11px 0 13px;
+  color: var(--muted);
+  font-size: 11.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+nav button[aria-pressed="true"] {
+  color: var(--accent);
+}
+
+nav .ic {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* =========================================================
+   Tabs, settings sheet, toast
+   ========================================================= */
+.view {
+  display: none;
+}
+
+.view.on {
+  display: block;
+}
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 17, .72);
+  display: none;
+  align-items: flex-end;
+  z-index: 40;
+}
+
+.sheet.open {
+  display: flex;
+}
+
+.sheet-in {
+  background: var(--surface);
+  width: 100%;
+  max-height: 88vh;
+  overflow: auto;
+  border-radius: 20px 20px 0 0;
+  padding: 22px var(--pad) calc(30px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+}
+
+.sheet h3 {
+  font-family: var(--display);
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.sheet-in > .field {
+  margin-bottom: 12px;
+}
+
+.sheet .hint {
+  margin-top: 16px;
+}
+
+.big.danger {
+  color: #E86A6A;
+}
+
+.toast {
+  position: fixed;
+  bottom: calc(86px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translate(-50%, 14px);
+  background: var(--accent);
+  color: #14121A;
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s, transform .22s;
+  z-index: 50;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* =========================================================
+   Media queries
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* On tablets/desktop, keep it phone-width and centered */
+@media (min-width: 620px) {
+  body {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  nav {
+    max-width: 560px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

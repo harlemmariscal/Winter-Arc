@@ -1,11 +1,11 @@
 # Morning Lift
 
-A small offline tracker for two people training in the early morning. No server, no accounts, no build step. Four files and a couple of icons.
+A small offline tracker for two people training in the early morning. No server, no accounts, no build step. A handful of files and a couple of icons.
 
 ## Put it online (about 3 minutes)
 
 1. On GitHub, make a new **public** repository. Name it something like `morning-lift`.
-2. Upload every file in this folder to the root of the repo: `index.html`, `manifest.json`, `sw.js`, `icon-192.png`, `icon-512.png`, `icon-maskable.png`. Commit.
+2. Upload every file in this folder to the root of the repo: `index.html`, `style.css`, `plan.js`, `app.js`, `manifest.json`, `sw.js`, `icon-192.png`, `icon-512.png`, `icon-maskable.png`. Commit.
 3. Go to **Settings → Pages**. Under "Build and deployment", set Source to **Deploy from a branch**, branch **main**, folder **/ (root)**. Save.
 4. Wait a minute, then open `https://YOURNAME.github.io/morning-lift/`.
 
@@ -29,12 +29,14 @@ Everything is saved in the browser's local storage on that one device. That mean
 
 ## Changing the plan
 
-Everything is in the `<script>` block at the bottom of `index.html`:
+Everything is in `plan.js`:
 
-- `EX` — the exercise list, each with a name, prescription, and a form cue.
-- `S` — the sessions, each one a list of exercise keys from `EX`.
+- `EXERCISES` — the exercise list, each with a name, prescription (`rx`), and a form cue.
+- `SESSIONS` — the workouts, each one a title and a list of exercise keys from `EXERCISES`.
 - `PROFILES` — per person: name, accent color, calorie and protein goals, the breakfast bowl, and `week`, an array of 7 days starting at **Sunday**. Each day picks a session and can carry a `run` note.
 - `FOODS` — the quick-add buttons.
+
+The rest of the code is split into `index.html` (page layout), `style.css` (looks), and `app.js` (logic).
 
 Calorie and protein goals can also be changed in Settings without touching the code.
 
